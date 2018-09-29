@@ -42,7 +42,7 @@
     "player_action": { "frames": [7, 23] },
     "player_climb": { "frames": [8, 9] },
     "player_kick": { "frames": [10] },
-    "player_walk": { "frames": [13, 11] },
+    "player_walk": { "frames": [13, 11], "next": "player_walk" },
     "player_cheer": { "frames": [12, 15] },
     "player_hold": { "frames": [14, 20] },
     "player_talk": { "frames": [16] },
