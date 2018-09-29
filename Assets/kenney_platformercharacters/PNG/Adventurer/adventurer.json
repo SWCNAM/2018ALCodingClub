@@ -1,0 +1,61 @@
+{
+
+"images": [
+    "adventurer.png"
+],
+
+"framerate": 20,
+"frames": [
+    [1, 1, 76, 103, 0, -4, -7],
+    [79, 1, 80, 97, 0, 0, -11],
+    [161, 1, 80, 97, 0, 0, -10],
+    [243, 1, 78, 99, 0, -1, -10],
+    [323, 1, 79, 95, 0, -1, -14],
+    [404, 1, 79, 95, 0, -1, -15],
+    [485, 1, 78, 94, 0, -1, -16],
+    [565, 1, 79, 92, 0, 0, -18],
+    [646, 1, 79, 92, 0, 0, -18],
+    [727, 1, 77, 93, 0, -2, -17],
+    [806, 1, 74, 94, 0, -2, -16],
+    [1, 106, 80, 86, 0, 0, -24],
+    [83, 100, 76, 93, 0, 0, -17],
+    [161, 100, 65, 93, 0, -8, -17],
+    [228, 102, 65, 92, 0, -8, -18],
+    [295, 102, 55, 92, 0, -7, -18],
+    [352, 98, 70, 96, 0, 0, -14],
+    [424, 98, 60, 95, 0, -9, -12],
+    [486, 97, 65, 93, 0, -13, -17],
+    [553, 97, 60, 95, 0, -11, -12],
+    [615, 95, 73, 98, 0, -3, -12],
+    [690, 96, 62, 93, 0, -9, -17],
+    [754, 97, 68, 81, 0, -7, -29],
+    [824, 97, 55, 95, 0, -12, -15]
+],
+
+"animations": {
+    "adventurer_hang": { "frames": [0] },
+    "adventurer_hurt": { "frames": [1] },
+    "adventurer_swim": { "frames": [2, 3] },
+    "adventurer_fall": { "frames": [4] },
+    "adventurer_kick": { "frames": [5] },
+    "adventurer_cheer": { "frames": [6, 9] },
+    "adventurer_action": { "frames": [16, 7] },
+    "adventurer_hold": { "frames": [8, 15] },
+    "adventurer_walk": { "frames": [10, 23] },
+    "adventurer_slide": { "frames": [11] },
+    "adventurer_talk": { "frames": [12] },
+    "adventurer_idle": { "frames": [13] },
+    "adventurer_back": { "frames": [14] },
+    "adventurer_climb": { "frames": [17, 19] },
+    "adventurer_skid": { "frames": [18] },
+    "adventurer_jump": { "frames": [20] },
+    "adventurer_stand": { "frames": [21] },
+    "adventurer_duck": { "frames": [22] }
+},
+
+"texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:608360e0a3bbe511d906456b777fa95a:41d0f6ab4ad004185811bdf24b85d5da:932c9555d40b6febc8dc495067cbaa4d$",
+        "Created with TexturePacker (https://www.codeandweb.com/texturepacker) for EaselJS"
+]
+
+}
