@@ -1,10 +1,10 @@
 {
 
 "images": [
-    "player.png"
+    "../Assets/kenney_platformercharacters/PNG/Player/player.png"
 ],
 
-"framerate": 20,
+"framerate": 6,
 "frames": [
     [1, 1, 76, 109, 0, -4, -1],
     [1, 112, 78, 93, 0, -2, -17],
