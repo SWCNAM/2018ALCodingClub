@@ -53,43 +53,37 @@ var app = {
 
   //TODO: this will change per level
   setupBricks : function(){
+    var brickArray =
+    [
+      [1,1,1,1,1,1,1,1,1,1],
+      [0,2,2,2,2,2,2,2,2,0],
+      [0,0,3,3,0,3,3,3,0,0],
+      [0,0,3,3,3,0,3,3,0,0],
+      [0,2,2,2,2,2,2,2,2,0]
+    ];
 
     this.bricks = new Array();
+    let sampleBrick = new Brick();
 
-    var i = 0;
+    //var i = 0;
     var brickTop = 50;
     var brickBackLeft = 150;
 
-    //Setup back row:
-    for (i = 0; i < 10; i++)
-    {
-      var brick = new Brick();
-      brick.position.x = 150 + (i * brick.size.width) + i;
-      brick.position.y = brickTop;
-      brick.health = 1;
-      this.bricks.push(brick);
-    }
+    for(let i = 0; i < brickArray.length; i++) {
+      let row = brickArray[i];
 
-    //Setup middle row:
-    for (i = 0; i < 8; i++)
-    {
-      var brick = new Brick();
-      brick.position.x = 201 + (i * brick.size.width) + i;
-      brick.position.y = brickTop + brick.size.height + 1;
-      brick.health = 2;
-      this.bricks.push(brick);
-    }
+      for(let j = 0; j < row.length; j++) {
+        if(row[j] != 0) {
+          var brick = new Brick();
+          brick.position.x = 150 + (j * brick.size.width) + j;
+          brick.position.y = brickTop + i;
+          brick.health = row[j];
+          this.bricks.push(brick); 
+        }
+      }
 
-    //Setup front row:
-    for (i = 0; i < 6; i++)
-    {
-      var brick = new Brick();
-      brick.position.x = 252 + (i * brick.size.width) + i;
-      brick.position.y = brickTop + (2 * brick.size.height) + 1;
-      brick.health = 3;
-      this.bricks.push(brick);
+      brickTop += sampleBrick.size.height;
     }
-
   },
 
   reset : function(){
@@ -127,7 +121,7 @@ var player = {
 
   // Defines initial position
   position: {
-    x: 375,
+    x: 120,
     y: 480
   },
 
@@ -241,26 +235,39 @@ var ball = {
       return;
     if (this.position.x + this.size.width < player.position.x)
       return;
+
+    let topPassedPlayer = this.position.y > player.position.y;
+
+    if(topPassedPlayer) {
+      return;
+    }
     
     this.direction.y = -1; //Moving up now
 
   },
 
   checkCollisionWithBricks : function(){
+    var startingDirection = JSON.parse(JSON.stringify(this.direction));
 
     var i = 0;
-    for (i = 0; i < app.bricks.length; i++)
-    {
+    for (i = 0; i < app.bricks.length; i++) {
       var brick = app.bricks[i];
 
-      if (this.position.y + this.size.height < brick.position.y)
+      if (this.position.y + this.size.height + (this.physics.speed * this.direction.y) < brick.position.y) { 
+        continue; 
+      }
+      
+      if (this.position.y + (this.physics.speed * this.direction.y) > brick.position.y + brick.size.height) {
         continue;
-      if (this.position.y > brick.position.y + brick.size.height)
+      }
+      
+      if (this.position.x + (this.physics.speed * this.direction.x) > brick.position.x + brick.size.width) {
         continue;
-      if (this.position.x > brick.position.x + brick.size.width)
+      }
+      
+      if (this.position.x + this.size.width + (this.physics.speed * this.direction.x) < brick.position.x) {
         continue;
-      if (this.position.x + this.size.width < brick.position.x)
-        continue;
+      }
 
       /* If the loop makes it this far, we have a collision */
       brick.health -= 1;
@@ -271,43 +278,80 @@ var ball = {
         app.bricks.splice(i, 1);
 
       //Update direction based on where we hit the brick
+     
+      
+      var distFromBottom = Math.abs(this.position.y - (brick.position.y + brick.size.height));
+      var distFromLeft = Math.abs((this.position.x + this.size.width) - brick.position.x);
+      var distFromTop = Math.abs((this.position.y + this.size.height) - brick.position.y);
+      var distFromRight = Math.abs(this.position.x - (brick.position.x + brick.size.width));
+
+      let ar = [distFromBottom, distFromLeft, distFromRight, distFromTop];
+      let min = Array.min(ar);
+
+      let side = '';
+
+      switch(min) {
+        case distFromBottom:
+        side = 'bottom'
+        break;
+        case distFromLeft:
+        side = 'left';
+        break;
+        case distFromTop:
+        side = 'top';
+        break;
+        case distFromRight:
+        side = 'right';
+        break;
+      }
 
       //Moving towards lower right
-      if (this.direction.x == 1
-          && this.direction.y == 1)
-      {
-        if (this.position.y > brick.position.y)
-          this.direction.x = -1;
-        else
+      if (startingDirection.x == 1 && startingDirection.y == 1) {
+        if(distFromTop == distFromLeft) {
+          side = 'left';
+        }
+
+        if(side == 'top') {
           this.direction.y = -1;
+        } else {
+          this.direction.x = -1;
+        }
       } 
       //Moving towards lower left
-      else if (this.direction.x == -1
-               && this.direction.y == 1)
-      {
-        if (this.position.y > brick.position.y)
-          this.direction.x = 1;
-        else
+      else if (startingDirection.x == -1 && startingDirection.y == 1) {
+        if(distFromTop == distFromRight) {
+          side = 'right';
+        }
+
+        if(side == 'top') {
           this.direction.y = -1;
+        } else {
+          this.direction.x = 1;
+        }
       }
       //Moving towards upper right
-      else if (this.direction.x == 1
-               && this.direction.y == -1)
-      {
-        if (this.position.y > brick.position.y)
-          this.direction.x = -1;
-        else
-          this.direction.y = -1;
-      }
-      //Moving towards upper-left
-      else if (this.direction.x == -1
-               && this.direction.y == -1)
-      {
-        if (this.position.y > brick.position.y)
-          this.direction.x = 1;
-        else
-          this.direction.y = -1;
+      else if (startingDirection.x == 1 && startingDirection.y == -1) {
+        if(distFromBottom == distFromLeft) {
+          side  = 'left';
+        }
 
+        if(side == 'bottom') {
+          this.direction.y = 1;
+        } else {
+          this.direction.x = -1;
+        }
+      }
+      //Moving towards upper left
+      else if (startingDirection.x == -1 && startingDirection.y == -1) {
+        if(distFromBottom == distFromRight) {
+          side = 'right';
+        }
+
+        if(side == 'bottom') {
+          this.direction.y = 1;
+        } else {
+          this.direction.x = 1;
+        }
       }
     }
   }
@@ -347,6 +391,10 @@ Brick.prototype.draw = function(){
 
   if (this.health > 0)
     app.context.fillRect(this.position.x, this.position.y, this.size.width, this.size.height);
+};
+
+Array.min = function( array ){
+  return Math.min.apply( Math, array );
 };
 
 app.init();
