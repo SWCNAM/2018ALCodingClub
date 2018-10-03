@@ -21,13 +21,16 @@ var app = {
 
   update : function(){
 
-    app.clearContext();
+    if(!app.pause) {
+      app.clearContext();
 
-    app.drawBricks();
-    player.draw();
-    ball.update();
+      app.drawBricks();
+      player.draw();
+      ball.update();
+      requestAnimationFrame(app.update);
+    }
     
-    requestAnimationFrame(app.update);
+    
   },
 
   clearContext : function(){
@@ -37,6 +40,14 @@ var app = {
 
   die : function(){
     //TODO: better death!
+    this.pause = true;
+    let self = this;
+
+    setTimeout(function() {
+      self.pause = false;
+      self.update();
+    }, 1000);
+
     player.lives -= 1;
 
     if (player.lives < 1)
@@ -96,7 +107,8 @@ var app = {
 
   canvas: null,
   context : null,
-  timeout: 33
+  timeout: 33,
+  pause : false
 
 };
 
@@ -135,7 +147,7 @@ var player = {
 
   size: {
     height: 10,
-    width: 50
+    width: 80
   },
 
   draw : function(){
@@ -155,13 +167,23 @@ var player = {
   },
 
   moveLeft: function(){
-    if (this.position.x > 0)
-      this.position.x -= this.physics.speed;
+    if(app.pause) {
+      return;
+    }
+
+    if (this.position.x > 0) {
+      this.position.x -= this.physics.speed * 2;
+    }
   },
 
   moveRight: function(){
-    if (this.position.x < (app.canvas.width - this.size.width))
-      this.position.x += this.physics.speed;
+    if(app.pause) {
+      return;
+    }
+
+    if (this.position.x < (app.canvas.width - this.size.width)) {
+      this.position.x += this.physics.speed * 2;
+    }
   },
 
   reset: function(){
@@ -241,6 +263,18 @@ var ball = {
     if(topPassedPlayer) {
       return;
     }
+
+    var distanceFromLeft = (this.position.x + this.size.width) - player.position.x;
+
+    if(distanceFromLeft < this.size.width) {
+      this.direction.x = -1;
+    }
+
+    var distanceFromRight = (player.position.x + player.size.width) - this.position.x;
+
+    if(distanceFromRight < this.size.width) {
+      this.direction.x = 1;
+    }
     
     this.direction.y = -1; //Moving up now
 
@@ -278,8 +312,6 @@ var ball = {
         app.bricks.splice(i, 1);
 
       //Update direction based on where we hit the brick
-     
-      
       var distFromBottom = Math.abs(this.position.y - (brick.position.y + brick.size.height));
       var distFromLeft = Math.abs((this.position.x + this.size.width) - brick.position.x);
       var distFromTop = Math.abs((this.position.y + this.size.height) - brick.position.y);
@@ -292,17 +324,17 @@ var ball = {
 
       switch(min) {
         case distFromBottom:
-        side = 'bottom'
-        break;
+          side = 'bottom'
+          break;
         case distFromLeft:
-        side = 'left';
-        break;
+          side = 'left';
+          break;
         case distFromTop:
-        side = 'top';
-        break;
+          side = 'top';
+          break;
         case distFromRight:
-        side = 'right';
-        break;
+          side = 'right';
+          break;
       }
 
       //Moving towards lower right
