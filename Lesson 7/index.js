@@ -34,9 +34,10 @@ function init() {
 function tick(event) {
     spriteMovement();
     stage.update(event);
-    document.getElementById("test1").innerHTML = spaceDown;
-    document.getElementById("test2").innerHTML = isJumping;
-    document.getElementById("test3").innerHTML = jumpHeight;
+    //testing elements 
+    // document.getElementById("test1").innerHTML = spaceDown;
+    // document.getElementById("test2").innerHTML = isJumping;
+    // document.getElementById("test3").innerHTML = jumpHeight;
 }
 
 function handleComplete() {
@@ -86,6 +87,7 @@ function handleKeyDown(event) {
             if (spaceDown == false) {
                 spaceDown = true;
                 if(isJumping == false){
+                    playerSprite.gotoAndPlay("player_jump");
                     jump();
                 }
             }
@@ -138,11 +140,15 @@ function spriteMovement() {
 }
 
 function jump() {
+    //if the space bar is down and they have not reach max height move up
     if (spaceDown == true && jumpHeight < maxJumpHeight) {
+        //locks additional jump actions while jumping
         isJumping = true;
         createjs.Tween.get(playerSprite)
             .to({ y: playerSprite.y - 50 }, 200)
+        //increments jump height counter
         jumpHeight++;
+        //start jump logic again once jump iteration has completed
         setTimeout(jump, 200)
     } else {
         startFalling();
@@ -155,7 +161,12 @@ function startFalling() {
         .to({ y: playerSprite.y + (50 * jumpHeight) }, (200 * jumpHeight))
     //do not reset the jump until they have completed the fall
     setTimeout(function () {
+        //reset jump
         jumpHeight = 0;
         isJumping = false;
+        //check if I need to resume the walk animation
+        if(leftDown == true || rightDown == true){
+            playerSprite.gotoAndPlay("player_walk");
+        }
     }, jumpHeight*300)
 }
