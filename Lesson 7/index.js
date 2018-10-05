@@ -11,6 +11,7 @@ var spaceDown = false;
 var isJumping = false;
 var jumpHeight = 0;
 
+
 init();
 
 function init() {
@@ -33,6 +34,9 @@ function init() {
 function tick(event) {
     spriteMovement();
     stage.update(event);
+    document.getElementById("test1").innerHTML = spaceDown;
+    document.getElementById("test2").innerHTML = isJumping;
+    document.getElementById("test3").innerHTML = jumpHeight;
 }
 
 function handleComplete() {
@@ -79,70 +83,10 @@ function handleKeyDown(event) {
             }
             break;
         case "Space":
-            //They are holding the button, we will get this event until they let go
-            //if this is the first time we are getting this event since they stopped hitting the button then set spaceDown to true
             if (spaceDown == false) {
                 spaceDown = true;
-                //if maxJumpHeight has been reset they can jump again
-                if (jumpHeight == 0) {
-                    //They are starting a new jump
-                    if (isJumping == false) {
-                        document.getElementById("test1").innerHTML = spaceDown;
-                        document.getElementById("test2").innerHTML = isJumping;
-                        document.getElementById("test3").innerHTML = jumpHeight;                       
-                        document.getElementById("test").innerHTML = "new jump";
-                        isJumping = true;
-                    }
-                    //Error: This should be impossible as isJumping is reset before jumpHeight
-                    else {
-                        document.getElementById("test1").innerHTML = spaceDown;
-                        document.getElementById("test2").innerHTML = isJumping;
-                        document.getElementById("test3").innerHTML = jumpHeight;
-                        document.getElementById("test").innerHTML = "Impossible!!";
-                    }
-                }
-                //They either going up or coming down
-                else {
-                    //attempted double jump
-                    if (isJumping == false) {
-                        document.getElementById("test1").innerHTML = spaceDown;
-                        document.getElementById("test2").innerHTML = isJumping;
-                        document.getElementById("test3").innerHTML = jumpHeight;
-                        document.getElementById("test").innerHTML = "attempted double jump";
-                    }
-                    //Error: This should be impossible as isJumping is reset before jumpHeight
-                    else {
-                        document.getElementById("test1").innerHTML = spaceDown;
-                        document.getElementById("test2").innerHTML = isJumping;
-                        document.getElementById("test3").innerHTML = jumpHeight;
-                        document.getElementById("test").innerHTML = "Impossible!!";
-                    }
-                }
-            }
-            //The spacebar is already down
-            else {
-                if (isJumping == true) {
-                    if(jumpHeight < maxJumpHeight){
-                        //They are going up!
-                        document.getElementById("test1").innerHTML = spaceDown;
-                        document.getElementById("test2").innerHTML = isJumping;
-                        document.getElementById("test3").innerHTML = jumpHeight;
-                        document.getElementById("test").innerHTML = "Uppppp!!!";
-                    }
-                    else{
-                        document.getElementById("test1").innerHTML = spaceDown;
-                        document.getElementById("test2").innerHTML = isJumping;
-                        document.getElementById("test3").innerHTML = jumpHeight;
-                        //They reached max jump height and are coming down!
-                        document.getElementById("test").innerHTML = "too high";
-                        startFalling();
-                    }
-                }
-                else{
-                    document.getElementById("test1").innerHTML = spaceDown;
-                    document.getElementById("test2").innerHTML = isJumping;
-                    document.getElementById("test3").innerHTML = jumpHeight;
-                    document.getElementById("test").innerHTML = "reached max height and are falling";
+                if(isJumping == false){
+                    jump();
                 }
             }
             break;
@@ -162,10 +106,6 @@ function handleKeyUp(event) {
             leftDown = false;
             break;
         case "Space":
-            //if they are ending the jump before max 
-            if (isJumping == true) {
-                startFalling();
-            }
             spaceDown = false;
             break;
         case "ArrowDown":
@@ -184,12 +124,6 @@ function handleKeyUp(event) {
 function spriteMovement() {
     playerSprite = stage.getChildByName("player");
     ground = stage.getChildByName("ground");
-    //if they are jumping
-    if (spaceDown == true && jumpHeight < maxJumpHeight && isJumping == true) {
-        createjs.Tween.get(playerSprite)
-            .to({ y: playerSprite.y - 50 }, 200)
-        jumpHeight++;
-    }
     //if they are walking
     if (rightDown == true) {
         createjs.Tween.get(ground)
@@ -203,14 +137,25 @@ function spriteMovement() {
     }
 }
 
+function jump() {
+    if (spaceDown == true && jumpHeight < maxJumpHeight) {
+        isJumping = true;
+        createjs.Tween.get(playerSprite)
+            .to({ y: playerSprite.y - 50 }, 200)
+        jumpHeight++;
+        setTimeout(jump, 200)
+    } else {
+        startFalling();
+    }
+}
+
 function startFalling() {
-    //They are no longer gaining height
-    isJumping = false;
     //moving sprite
     createjs.Tween.get(playerSprite)
         .to({ y: playerSprite.y + (50 * jumpHeight) }, (200 * jumpHeight))
     //do not reset the jump until they have completed the fall
     setTimeout(function () {
         jumpHeight = 0;
-    }, 1000)
+        isJumping = false;
+    }, jumpHeight*300)
 }
