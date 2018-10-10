@@ -3,6 +3,11 @@ function print(message) {
   elem.innerHTML += '<div class="print">' + message + '</div>';
 }
 
+function divider() {
+  const elem = getOutputElement();
+  elem.innerHTML += '<div class="divider"></div>';
+}
+
 function clear() {
   const elem = getOutputElement();
   elem.innerHTML = '';

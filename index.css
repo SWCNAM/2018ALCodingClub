@@ -25,7 +25,7 @@ body {
 }
 
 .page-title {
-    padding: 1rem;
+    padding: .5rem;
     font-weight: bold;
     font-size: 24px;
 }
@@ -39,11 +39,32 @@ body {
     padding: 1rem;
 }
 
-#output {
+#output, #lesson {
     margin: .5rem;
 }
 
 .print {
+    /* border-bottom: 1px solid #ccc; */
+    padding: .2rem 0;
+}
+
+.divider {
     border-bottom: 1px solid #ccc;
     padding: .2rem 0;
+}
+
+#container {
+    display: flex;
+    width: 100%;
+}
+
+#lesson {
+    width: 600px;
+    background: #eee;
+    border: 1px solid #ccc;
+}
+
+#container #output {
+    flex-grow: 1;
+    
 }
