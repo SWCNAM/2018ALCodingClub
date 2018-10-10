@@ -1,8 +1,53 @@
+//
+//Game variables
+//
+var gameTitle = "My Game";
+
+//
+//Player (paddle) variables
+//
+var playerXPosition = 400;
+var playerYPosition = 480;
+var playerLives = 10;
+var playerSpeed = 10;
+var playerHeight = 10;
+var playerWidth = 80;
+
+//
+//Ball variables
+//
+var ballXPosition = 50;
+var ballYPosition = 50;
+var ballHeight = 10;
+var ballWidth = 10;
+var ballSpeed = 5;
+
+//
+//Brick variables
+//
+var strongBrickColor = 'green';
+var mediumBrickColor = 'yellow';
+var easyBrickColor = 'red';
+
+//
+//The level
+//
+var brickArray = [
+  [1,1,1,1,1,1,1,1,1,1],
+  [0,2,2,2,2,2,2,2,2,0],
+  [0,0,1,3,1,3,3,3,0,0],
+  [0,0,3,3,3,2,3,3,0,0],
+  [0,0,0,2,1,1,2,0,2,3]
+];
+
+var mousePressed = false;
+
 var app = {
 
   init : function(){
 
     this.canvas = document.querySelector('#myGameCanvas');
+    this.canvas.offset = this.canvas.getBoundingClientRect().x;
     this.context = this.canvas ? this.canvas.getContext('2d') : null;
 
     if (!this.context)
@@ -12,6 +57,19 @@ var app = {
     }
 
     window.addEventListener('keydown', controller.keypress, true);
+    //window.addEventListener('mousedown', alert('test'), true);
+    window.onmousedown = function() {
+      mousePressed = true;
+    }
+    window.onmouseup = function() {
+      mousePressed = false;
+    }
+
+    var canvas = this.canvas;
+
+    window.onmousemove = function(e) {
+      player.position.x = e.x - canvas.getBoundingClientRect().x - (playerWidth / 2);
+    }
     this.setupBricks();
     this.update();
 
@@ -62,14 +120,7 @@ var app = {
 
   //TODO: this will change per level
   setupBricks : function(){
-    var brickArray =
-    [
-      [1,1,1,1,1,1,1,1,1,1],
-      [0,2,2,2,2,2,2,2,2,0],
-      [0,0,1,3,1,3,3,3,0,0],
-      [0,0,3,3,3,2,3,3,0,0],
-      [0,0,0,2,1,1,2,0,2,3]
-    ];
+
 
     this.bricks = new Array();
     let sampleBrick = new Brick();
@@ -131,21 +182,21 @@ var player = {
 
   // Defines initial position
   position: {
-    x: 120,
-    y: 480
+    x: playerXPosition,
+    y: playerYPosition
   },
 
   score: 0,
 
-  lives: 3,
+  lives: playerLives,
 
   physics: {
-    speed: 10
+    speed: playerSpeed
   },
 
   size: {
-    height: 10,
-    width: 80
+    height: playerHeight,
+    width: playerWidth
   },
 
   draw : function(){
@@ -156,12 +207,15 @@ var player = {
     app.context.fillStyle = "rgba(0, 0, 0, .2)";
 
     app.context.font = "18px sans-serif";
-    app.context.fillText("Lives", 40, 20);
-    app.context.fillText("Score", 40, 120);
+    app.context.fillText("Lives", 50, 20);
+    app.context.fillText("Score", 50, 120);
 
     app.context.font = "48px sans-serif";
-    app.context.fillText(this.lives, 40, 75);
-    app.context.fillText(this.score, 40, 175);
+    app.context.fillText(this.lives, 50, 75);
+    app.context.fillText(this.score, 50, 175);
+
+    app.context.font = "24px sans-serif";
+    app.context.fillText(gameTitle, 700, 20);
   },
 
   moveLeft: function(){
@@ -185,27 +239,46 @@ var player = {
   },
 
   reset: function(){
-    this.lives = 3;
+    this.lives = playerLives;
     this.score = 0;
-    this.position.x = 100;
+    this.position.x = playerXPosition;
   }
 
 };
 
+function collide(r1,r2){
+  var dx=(r1.position.x+r1.size.width/2)-(r2.position.x+r2.size.width/2);
+  var dy=(r1.position.y+r1.size.height/2)-(r2.position.y+r2.size.height/2);
+  var width=(r1.size.width+r2.size.width)/2;
+  var height=(r1.size.height+r2.size.height)/2;
+  var crossWidth=width*dy;
+  var crossHeight=height*dx;
+  var collision='none';
+  //
+  if(Math.abs(dx)<=width && Math.abs(dy)<=height){
+      if(crossWidth>crossHeight){
+          collision=(crossWidth>(-crossHeight))?'bottom':'left';
+      }else{
+          collision=(crossWidth>-(crossHeight))?'right':'top';
+      }
+  }
+  return(collision);
+} 
+
 var ball = {
 
   position: {
-    x: 50,
-    y: 50
+    x: ballXPosition,
+    y: ballYPosition
   },
 
   size: {
-    height: 10,
-    width: 10
+    height: ballHeight,
+    width: ballWidth
   },
 
   physics: {
-    speed: 5
+    speed: ballSpeed
   },
 
   direction: {
@@ -262,18 +335,11 @@ var ball = {
       return;
     }
 
-    var distanceFromLeft = (this.position.x + this.size.width) - player.position.x;
+    var centerOfPaddle = player.position.x + (player.size.width / 2);
+    var centerOfBall = this.position.x + (this.size.width / 2);
+    var distanceFromCenter = (centerOfBall - centerOfPaddle) / 20;
 
-    if(distanceFromLeft < this.size.width) {
-      this.direction.x = -1;
-    }
-
-    var distanceFromRight = (player.position.x + player.size.width) - this.position.x;
-
-    if(distanceFromRight < this.size.width) {
-      this.direction.x = 1;
-    }
-    
+    this.direction.x = distanceFromCenter;
     this.direction.y = -1; //Moving up now
 
   },
@@ -285,19 +351,9 @@ var ball = {
     for (i = 0; i < app.bricks.length; i++) {
       var brick = app.bricks[i];
 
-      if (this.position.y + this.size.height + (this.physics.speed * this.direction.y) < brick.position.y) { 
-        continue; 
-      }
-      
-      if (this.position.y + (this.physics.speed * this.direction.y) > brick.position.y + brick.size.height) {
-        continue;
-      }
-      
-      if (this.position.x + (this.physics.speed * this.direction.x) > brick.position.x + brick.size.width) {
-        continue;
-      }
-      
-      if (this.position.x + this.size.width + (this.physics.speed * this.direction.x) < brick.position.x) {
+      var collision = collide(this, brick);
+
+      if(collision == "none") {
         continue;
       }
 
@@ -306,83 +362,26 @@ var ball = {
 
       player.score += 20;
 
-      if (brick.health < 1)
-        app.bricks.splice(i, 1);
+      if (brick.health < 1) {
+        app.bricks.splice(i, 1)
+      };
 
-      //Update direction based on where we hit the brick
-      var distFromBottom = Math.abs(this.position.y - (brick.position.y + brick.size.height));
-      var distFromLeft = Math.abs((this.position.x + this.size.width) - brick.position.x);
-      var distFromTop = Math.abs((this.position.y + this.size.height) - brick.position.y);
-      var distFromRight = Math.abs(this.position.x - (brick.position.x + brick.size.width));
-
-      let ar = [distFromBottom, distFromLeft, distFromRight, distFromTop];
-      let min = Array.min(ar);
-
-      let side = '';
-
-      switch(min) {
-        case distFromBottom:
-          side = 'bottom'
-          break;
-        case distFromLeft:
-          side = 'left';
-          break;
-        case distFromTop:
-          side = 'top';
-          break;
-        case distFromRight:
-          side = 'right';
-          break;
-      }
-
-      //Moving towards lower right
-      if (startingDirection.x == 1 && startingDirection.y == 1) {
-        if(distFromTop == distFromLeft) {
-          side = 'left';
-        }
-
-        if(side == 'top') {
+      switch(collision) {
+        case "top":
           this.direction.y = -1;
-        } else {
-          this.direction.x = -1;
-        }
-      } 
-      //Moving towards lower left
-      else if (startingDirection.x == -1 && startingDirection.y == 1) {
-        if(distFromTop == distFromRight) {
-          side = 'right';
-        }
-
-        if(side == 'top') {
-          this.direction.y = -1;
-        } else {
-          this.direction.x = 1;
-        }
-      }
-      //Moving towards upper right
-      else if (startingDirection.x == 1 && startingDirection.y == -1) {
-        if(distFromBottom == distFromLeft) {
-          side  = 'left';
-        }
-
-        if(side == 'bottom') {
+          break;
+        case "bottom":
           this.direction.y = 1;
-        } else {
+          break;
+        case "left":
           this.direction.x = -1;
-        }
-      }
-      //Moving towards upper left
-      else if (startingDirection.x == -1 && startingDirection.y == -1) {
-        if(distFromBottom == distFromRight) {
-          side = 'right';
-        }
-
-        if(side == 'bottom') {
-          this.direction.y = 1;
-        } else {
+          break;
+        case "right":
           this.direction.x = 1;
-        }
+          break;
       }
+
+      i = 999;
     }
   }
 
@@ -409,13 +408,13 @@ Brick.prototype.draw = function(){
 
   switch (this.health) {
     case 3:
-      app.context.fillStyle = "rgb(0, 200, 0)"; //Green
+      app.context.fillStyle = strongBrickColor; //Green
       break;
     case 2:
-      app.context.fillStyle = "rgb(200, 200, 0)"; //Orange?
+      app.context.fillStyle = mediumBrickColor; //Orange?
       break;
     case 1:
-      app.context.fillStyle = "rgb(200, 0, 0)"; //Red
+      app.context.fillStyle = easyBrickColor; //Red
       break;
   }
 
