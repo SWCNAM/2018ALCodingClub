@@ -106,8 +106,11 @@ var app = {
 
     player.lives -= 1;
 
-    if (player.lives < 1)
-      this.reset();
+    switch(player.lives){
+      case 0:
+        this.reset();
+        break;
+    }
 
     ball.reset();
   },
@@ -150,6 +153,10 @@ var app = {
     player.reset();
     ball.reset();
     this.setupBricks();
+  },
+  showMessage : function(messageText){
+    this.context.font = "24px sans-serif";
+    this.context.fillText(messageText, 350, 300);
   },
 
   bricks: [],
