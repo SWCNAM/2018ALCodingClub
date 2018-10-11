@@ -39,6 +39,11 @@ body {
     padding: 1rem;
 }
 
+.lesson-content {
+    margin: .5rem;
+    padding: 1rem;
+}
+
 #output, #lesson {
     margin: .5rem;
 }
@@ -67,4 +72,8 @@ body {
 #container #output {
     flex-grow: 1;
     
+}
+
+.hidden {
+    display:none;
 }
