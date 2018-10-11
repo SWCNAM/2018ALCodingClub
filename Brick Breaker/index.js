@@ -154,6 +154,10 @@ var app = {
     ball.reset();
     this.setupBricks();
   },
+  showMessage : function(messageText){
+    this.context.font = "24px sans-serif";
+    this.context.fillText(messageText, 350, 300);
+  },
 
   bricks: [],
 
