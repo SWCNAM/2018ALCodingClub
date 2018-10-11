@@ -106,8 +106,11 @@ var app = {
 
     player.lives -= 1;
 
-    if (player.lives < 1)
-      this.reset();
+    switch(player.lives){
+      case 0:
+        this.reset();
+        break;
+    }
 
     ball.reset();
   },
@@ -300,14 +303,22 @@ var ball = {
 
   update : function(){
 
-    if (this.position.x <= 0) //Left Bounds
+     //Left Bounds
+    if (this.position.x <= 0){
       this.direction.x = 1;
-    if (this.position.x >= app.canvas.width) //Right Bounds
+    }
+    //Right Bounds
+    if (this.position.x >= app.canvas.width) {
       this.direction.x = -1;
-    if (this.position.y <= 0) //Top Bounds
-      this.direction.y = 1;
-    if (this.position.y >= app.canvas.height) //Bottom Bounds
+    }
+    //Top Bounds
+    if (this.position.y <= 0){
+       this.direction.y = 1;
+    }
+    //Bottom Bounds
+    if (this.position.y >= app.canvas.height){
       app.die(); //TODO: die
+    }
 
     this.checkCollisionWithPlayer();
     this.checkCollisionWithBricks();
