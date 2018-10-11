@@ -301,9 +301,9 @@ var ball = {
   update : function(){
 
     if (this.position.x <= 0) //Left Bounds
-      this.direction.x = 1;
-    if (this.position.x >= app.canvas.width) //Right Bounds
-      this.direction.x = -1;
+      this.direction.x = -this.direction.x;
+    if (this.position.x + this.size.width >= app.canvas.width) //Right Bounds
+      this.direction.x = -this.direction.x;
     if (this.position.y <= 0) //Top Bounds
       this.direction.y = 1;
     if (this.position.y >= app.canvas.height) //Bottom Bounds
@@ -374,14 +374,12 @@ var ball = {
           this.direction.y = 1;
           break;
         case "left":
-          this.direction.x = -1;
+          this.direction.x = -this.direction.x;
           break;
         case "right":
-          this.direction.x = 1;
+          this.direction.x = -this.direction.x;
           break;
       }
-
-      i = 999;
     }
   }
 

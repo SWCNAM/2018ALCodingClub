@@ -3,8 +3,6 @@
 // 1. Print out a number
 // 2. Print out arithmetic results
 //
-print("Numbers")
-print(2);
 
 //
 //String basics (print and concatenate)
