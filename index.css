@@ -77,3 +77,41 @@ body {
 .hidden {
     display:none;
 }
+
+.section {
+    border: 1px solid #ccc;
+    background: #eee;
+    margin-bottom: 16px;
+    width: 1000px;
+}
+
+.section-title {
+    font-weight: bold;
+    font-size: 24px;
+    padding: 1em;
+    border-bottom: 1px solid #ccc;
+}
+
+.section-content {
+    background: #fff;
+    display: flex;
+    flex-direction: row;
+}
+
+.section-content .section-body {
+    width: 700px;
+
+}
+
+.section-content .section-image {
+    padding: 1em;
+}
+
+.section-content .section-image img {
+    max-width: 300px;
+}
+
+.section-body {
+    padding: 1em; 
+    background: #fff;
+}

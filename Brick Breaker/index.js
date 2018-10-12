@@ -387,6 +387,8 @@ var ball = {
           this.direction.x = -this.direction.x;
           break;
       }
+
+      i = 999;
     }
   }
 
