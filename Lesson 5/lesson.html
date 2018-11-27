@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 5 - For Loops</title>
+    <link rel="stylesheet" href="../index.css" />
+</head>
+
+<body>
+    <div class="background-al-main background-al-main-border-bottom page-title">
+        Alain Locke | Coding Club | Lesson 5
+    </div>
+    <div id="output">
+        <div class="section">
+            <div class="section-title">
+                Arrays
+            </div>
+            <div class="section-content">
+                <div class="section-body">
+                    Arrays are a type of variable. They let us store multiple items in a single variable.
+                </div>
+                <div class="section-image">
+                    <img src="./computer-programming.jpg" />
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="section-title">
+                Variable Refresher
+            </div>
+            <div class="section-content">
+                <div class="section-body">
+                    <code style="font-size: 20px;">
+                        var name = "Jim";
+                    </code>
+                    <div style="margin-top: 20px;">
+                        Variables give us a way to store a value and give it a label so our program can easily refer to it later.
+                    </div>
+                    <div style="margin-top: 20px;">
+                        Think of a variable like a box that you can put something in. In our example, imagine that the box has "name" written on
+                        the side of it, and inside the box is the word "Jim".
+                    </div>
+                </div>
+                <div class="section-image">
+                    <img src="./box.png" />
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="section-title">
+                Creating an Array
+            </div>
+            <div class="section-content">
+                <div class="section-body">
+                    <code style="font-size: 20px;">
+                        var names = ["Jim", "Katie", "Bill", "Adelaide"];
+                    </code>
+                    <div style="margin-top: 20px;margin-bottom: 20px;">
+                        Use square brackets "[ ]" and separate each value with a comma ",".
+                    </div>
+                    <code style="font-size: 20px;">
+                        var numbers = [200, 120, 3000, 450];
+                    </code>
+                    <div style="margin-top: 20px;">
+                        You can store any type of variable (strings, numbers, etc...) in arrays.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="section-title">
+                Getting Data Out of an Array
+            </div>
+            <div class="section-content">
+                <div style="padding: 1em;">
+                    <div style="margin-bottom: 20px;">
+                        We cannot get values out of an array the same way we do out of a normal variable. We need to tell the computer which item
+                        in the array we want to get the value for. We do this by telling the computer the "index" that we
+                        want to use.
+                    </div>
+                    <code style="font-size: 20px;">
+                                var names = ["Jim", "Katie", "Bill", "Adelaide"];
+                                <br />
+                                var name = names[0];
+                                <br />
+                                // name has the value of "Jim"
+                                <br />
+                                <br />
+                                var name = names[1];
+                                <br />
+                                // name has the value of "Katie"
+                                <br />
+                                <br />
+                                var name = names[5];
+                                <br />
+                                // There is no element at index 5, so this would 
+                                <br />// not able to give us a value.  This is a common issue with 
+                                <br />// arrays so look out for this.
+                        </code>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="section-title">
+                Why Do Arrays Start at 0 Instead of 1?
+            </div>
+            <div class="section-content">
+                <div class="section-body">
+                    <div style="margin-bottom: 20px;">
+                        Think of an array like a line at the grocery store.
+                        <br />
+                        <br /> If you are the first person in line, how many people are in front of you? 0.
+                        <br />
+                        <br /> If you are the second person in line, how many people are in front of you? 1.
+                        <br />
+                        <br />
+                    </div>
+                </div>
+                <div class="section-image">
+                    <img src="./example-array.png" />
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="section-title">
+                Modifying an Array
+            </div>
+            <div class="section-content">
+                <div class="section-body">
+                    <div style="margin-bottom: 20px;">
+                        You can add to, remove from, or change items in an array
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="section-title">
+                For loops
+            </div>
+            <div class="section-content">
+                <div class="section-body">
+                    <div style="margin-bottom: 20px;">
+                        For loops let us run a piece of code multiple times for each item in a list
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
