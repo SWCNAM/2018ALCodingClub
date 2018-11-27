@@ -28,6 +28,7 @@ var ballSpeed = 5;
 var strongBrickColor = 'green';
 var mediumBrickColor = 'yellow';
 var easyBrickColor = 'red';
+var brickPointValue = 100;
 
 //
 //The level
@@ -367,7 +368,7 @@ var ball = {
       /* If the loop makes it this far, we have a collision */
       brick.health -= 1;
 
-      player.score += 20;
+      player.score += brickPointValue;
 
       if (brick.health < 1) {
         app.bricks.splice(i, 1)
