@@ -1,0 +1,27 @@
+We are going to use Brick Breaker to learn more about programming!
+
+Follow the steps below. Feel free to ask a teacher or other students for help if you get stuck!
+
+---------------------------
+Goal 4: 
+---------------------------
+1. Open the Brick Breaker JavaScript file.
+2. Press the Control key and the F key at the same time to open up a search. 
+   You can also open the Edit menu at the top, and click on the Find option.
+3. Search for the phrase 'player.lives'.
+4. How many results do you find?
+5. What do the lines of code for each result seem to be doing?
+   Add a comment above each of them with your best guess.
+6. In the switch statement, add the following lines above case 0:
+
+    case 9:
+        this.showMessage("You're a cat!");
+        break;
+
+7. Now, open the Brick Breaker game and play a little bit.
+8. What happens after you lose a life? 
+   Is it different than what happens after you lose 2 lives?
+   What do you think is happening?
+9. Add some more of your own cases and messages!
+10. Try moving the cases out of order (putting a smaller number before a larger one). What happens?
+11. Try not putting 'break;' at the end of some of the cases. What happens?

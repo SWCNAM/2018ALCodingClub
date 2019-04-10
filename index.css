@@ -1,0 +1,117 @@
+html {
+    box-sizing: border-box;
+    font-size: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+  
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+.background-al-main {
+    background-color: #16a7e0;
+    color: #fff;
+}
+
+.background-al-main-border-bottom {
+    border-bottom: 2px solid #107ca7;
+}
+
+.page-title {
+    padding: .5rem;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.lesson-summary {
+    background: #ddd;
+    border: 1px solid #ccc;
+    font-style: italic;
+    font-weight: bold;
+    margin: .5rem;
+    padding: 1rem;
+}
+
+.lesson-content {
+    margin: .5rem;
+    padding: 1rem;
+}
+
+#output, #lesson {
+    margin: .5rem;
+}
+
+.print {
+    /* border-bottom: 1px solid #ccc; */
+    padding: .2rem 0;
+}
+
+.divider {
+    border-bottom: 1px solid #ccc;
+    padding: .2rem 0;
+}
+
+#container {
+    display: flex;
+    width: 100%;
+}
+
+#lesson {
+    width: 600px;
+    background: #eee;
+    border: 1px solid #ccc;
+}
+
+#container #output {
+    flex-grow: 1;
+    
+}
+
+.hidden {
+    display:none;
+}
+
+.section {
+    border: 1px solid #ccc;
+    background: #eee;
+    margin-bottom: 16px;
+    width: 1000px;
+}
+
+.section-title {
+    font-weight: bold;
+    font-size: 24px;
+    padding: 1em;
+    border-bottom: 1px solid #ccc;
+}
+
+.section-content {
+    background: #fff;
+    display: flex;
+    flex-direction: row;
+}
+
+.section-content .section-body {
+    width: 700px;
+
+}
+
+.section-content .section-image {
+    padding: 1em;
+}
+
+.section-content .section-image img {
+    max-width: 300px;
+}
+
+.section-body {
+    padding: 1em; 
+    background: #fff;
+}

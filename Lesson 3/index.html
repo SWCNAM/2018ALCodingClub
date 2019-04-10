@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 3</title>
+    <link rel="stylesheet" href="../index.css" />
+</head>
+
+<body>
+    <div class="background-al-main background-al-main-border-bottom page-title">
+        Alain Locke | Coding Club | Lesson 3
+    </div>
+    <div class="lesson-summary">
+        Lesson 3: Learn about control flow!
+    </div>
+    <div class="lesson-content">
+        <h2>Lesson for today:</h2>
+        <p>
+            <strong>Control flow</strong> are the words we use for code that helps the computer make decisions.
+        </p>
+
+        <p>
+            We are going to learn about a couple of specific kinds of control flow: <strong>if</strong> and <strong>switch</strong>
+            statements.
+        </p>
+
+        <h3>If Statements</h3>
+        <p>
+            <strong>If</strong> statements tells the computer to do an action based on whether something is true or
+            false.
+            <br />
+            <br />
+            For example: <strong>If</strong> I have at least 2 hours of free time <strong>then</strong> I will watch a
+            movie. Or <strong> else</strong>, I will watch YouTube videos.
+            <br />
+            <br />
+            In JavaScript code, the 'if' statement for the example might look like this:
+            <pre><code>
+    if(freeHours >= 2) {
+
+        watchMovie();
+    } else {
+
+        watchYouTube();
+    }
+            </code></pre>
+            One interesting thing is that else part of the statement is actually optional! Sometimes you don't want to
+            do anything if your deciding factor is not true.
+            In that case, you can just write the if part and skip the else part.
+            <br />
+            <br />
+            For example, if it is raining, then I want to bring an umbrella with me. But if it's not raining, I don't
+            want to do anything differently than I normally would.
+            <br />
+            <br />
+            What do you think that looks like in code?
+            <br />
+            <button id="RevealIfStatementButton">Show If Statement</button>
+            <div id="IfStatementContainer" class="hidden">
+                <pre><code>
+    if(isRaining) {            
+        items.add(umbrella);
+    }
+                </code></pre>
+            </div>
+            <br />
+            <br />
+            Now let's make some of our own examples!
+            <br />
+            <br />
+            Please enter some statements that can either be true or false (example: "I like apples"):
+            <br />
+            <input type="text" id="IfStatementInput" />
+            <button type="submit" id="AddIfStatementButton">Save</button>
+            <br />
+            <br />
+            Now, we'll use the statements you entered to make our own if statements. Follow the if statement to see if
+            you should stand or sit!
+            <br />
+            <button id="RevealIfStatementGameButton" disabled>Show If Statement</button>
+            <div id="IfStatementGameContainer" class="hidden">
+                <pre><code>
+    if(<span id="IfGameText"></span>) {
+        Stand up!
+    } else {    
+        Sit down!
+    }
+                </code></pre>
+            </div>
+            <br />
+            <br />
+            Finally, if statements can get pretty complicated - you might see multiple ifs together, or even an if
+            nested inside of another one!
+            But as long as you figure out if each part is true or false, you'll be okay.
+            <br />
+            A complicated if statement might look like this:
+            <pre><code>
+    if(isRaining) {
+        // If it's raining, bring an umbrella!
+        items.add(umbrella)
+
+        if(temperatureOutside < 60){
+            // If it's raining and also it's not warm outside, bring a jacket too.        
+            items.add(rainJacket)
+        }
+    }
+            </code></pre>
+        </p>
+
+        <h3>Switch Statements</h3>
+        <p>
+            <strong>Switch</strong> statements tell the computer to do actions based on multiple potential choices.
+            Sometimes, just deciding between true or false doesn't give you all the options you want!
+            <br />
+            <br />
+            For example: Based on the current day of the week, I could either get ready for work in the morning, or
+            sleep in.
+            <br />
+            <br />
+            In JavaScript code, that would look like this:
+            <pre><code>
+    switch(today){
+        case "Monday":
+            getReady();
+            break;
+        case "Tuesday":
+            getReady();
+            break;
+        case "Wednesday":
+            getReady();
+            break;
+        case "Thursday":
+            getReady();
+            break
+        case "Friday":
+            getReady();
+            break;
+        case "Saturday":
+            sleepIn();
+            break;
+        case "Sunday":
+            sleepIn();
+            break;          
+    }      
+            </pre></code>
+            <strong>break</strong> is a special word that tells the computer to exit the switch statement. If we don't include that, then if today is Friday,
+            you would end up doing the actions for Saturday and Sunday too (and accidentally sleeping in)!
+            <br />
+            <br />
+            You can use numbers inside of a switch statement, too. In fact, that's what we'll do for today's challenge!
+            <br />
+            <br />
+            Here's an example of what that could look like in our Brick Breaker game. Notice that you can skip numbers and that you can put
+            case statements together if you want the same thing to happen for both of the numbers!
+            <pre><code>
+    switch(brickBreakerLivesLeft){
+        case 9:
+        case 8:
+            this.showMessage("You still have lots of lives left. Keep trying!");
+        case 3:
+            this.showMessage("Just a few lives left! Be careful!");
+        case 1:
+            this.showMessage("Uh oh! This is your last life!");                    
+    }      
+            </pre></code>
+        </p>
+
+        <h2>Challenges for today:</h2>
+        <ol>
+            <li>
+                Please find <strong>one if statement</strong> and <strong>one switch statement</strong> in your Brick Breaker code.
+                Call over one of the teachers when you've found them. Try to guess what the if and switch statements are doing, too!
+            </li>
+            <li>
+                Update the Brick Breaker game so that if the user hits the top of the screen, the brick colors switch!
+                <ul>
+                    <li>Hint: Look for a comment in the 'update' function that mentions the word 'Top'.</li>
+                    <li>Bonus challenge: Add more complex 'if' statements so that if the user hits the top of the
+                        screen again, the colors change back!</li>
+                </ul>
+            </li>
+            <li>
+                Update the Brick Breaker game so that special messages show to the user based on how many lives they
+                have left!
+                <ul>
+                    <li>Hint: look for the 'die' function. There is a clue in this lesson as well!</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+    <script src="../utilities.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+We are going to use Brick Breaker to learn more about programming!
+
+Follow the steps below. Feel free to ask a teacher or other students for help if you get stuck!
+
+---------------------------
+Goal 1: Open Brick Breaker
+---------------------------
+1. Find the Brick Breaker folder in Visual Studio Code.
+2. We are going to open the Brick Breaker game in the Chrome browser. The next few steps tell you how to do this.
+3. Open the Brick Breaker folder in Explorer (the program that shows you all the files in your computer).
+4. Look for the index.html file. Do you see the Chrome icon next to it?
+5. Double-click the index.html file. This should open it in your Chrome browser!
+6. Answer the questions below!
+
+Questions for Goal 1:
+
+1. What colors are the bricks? (bonus - what does each brick color mean?)
+2. How many lives do you start out with?
+3. How many points do you get for each brick?
+
+--------------------------------
+Goal 2: Find and write comments
+--------------------------------
+1. In the Brick Breaker folder, find the index.js file.
+2. Put your cursor on Line 1 of the file. Press enter twice so that all the code moves down 2 lines.
+3. Move your cursor back up to the top of the file.
+4. Type [Your Name]'s Brick Breaker Game (ex. Denise's Brick Breaker Game).
+5. Hover over the words you just type. Do you see any red squiggly lines?
+6. Put your cursor all the way over to the top left of the file (before the first letter of your name).
+7. Type '// ' before your name (ex. // Denise's Brick Breaker Game).
+8. What happens to the red lines?
+9. What happens to the line of text you typed?
+10. Find another example of a line of code with '//' in front of it.
+    In JavaScript, lines of code starting with '//' are called comments. 
+    Where in the file did you find another comment, and what do you think it is there for?
+
+    Write your answers down here:
+
+    1. I found a line of code starting with '//' on Line Number ___.
+    2. This is what I think the line of code is there for: _________________________________.
+
+----------------------------
+Goal 3: Work with variables
+----------------------------
+1. The top section of the index.js file has 4 different categories of variables. 
+   These control different parts of the game. 
+   
+   What are the 4 categories? Write them down below.
+
+   1. ____ variables
+   2. _______________ variables
+   3.
+   4. 
+
+2. Find the gameTitle variable. What line number was it on?
+
+   Write the answer down here: Line ____.
+
+3. Change the gameTitle variable.
+4. Go back to Chrome and refresh the Brick Breaker tab. 
+5. Answer these two questions:
+   
+   1. What changed when you changed gameTitle?
+   2. What does the gameTitle variable store?
+
+6. Change another variable in the first section of the file. Try to figure out what it does, too!
+7. When you figure it out, make a comment above that variable to explain what it does.
+8. Show a teacher when your comment is complete!
+9. Repeat steps 7 and 8 for three more variables. We will share the ones we chose at the end of the class.
+
+    Write the names of the variables you chose here:
+
+    1. 
+    2.
+    3.
