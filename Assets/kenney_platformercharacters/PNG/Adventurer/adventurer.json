@@ -1,10 +1,10 @@
 {
 
 "images": [
-    "adventurer.png"
+    "../Assets/kenney_platformercharacters/PNG/Adventurer/adventurer.png"
 ],
 
-"framerate": 20,
+"framerate": 6,
 "frames": [
     [1, 1, 76, 103, 0, -4, -7],
     [79, 1, 80, 97, 0, 0, -11],
@@ -33,24 +33,24 @@
 ],
 
 "animations": {
-    "adventurer_hang": { "frames": [0] },
-    "adventurer_hurt": { "frames": [1] },
-    "adventurer_swim": { "frames": [2, 3] },
-    "adventurer_fall": { "frames": [4] },
-    "adventurer_kick": { "frames": [5] },
-    "adventurer_cheer": { "frames": [6, 9] },
-    "adventurer_action": { "frames": [16, 7] },
-    "adventurer_hold": { "frames": [8, 15] },
-    "adventurer_walk": { "frames": [10, 23] },
-    "adventurer_slide": { "frames": [11] },
-    "adventurer_talk": { "frames": [12] },
-    "adventurer_idle": { "frames": [13] },
-    "adventurer_back": { "frames": [14] },
-    "adventurer_climb": { "frames": [17, 19] },
-    "adventurer_skid": { "frames": [18] },
-    "adventurer_jump": { "frames": [20] },
-    "adventurer_stand": { "frames": [21] },
-    "adventurer_duck": { "frames": [22] }
+    "player_hang": { "frames": [0] },
+    "player_hurt": { "frames": [1] },
+    "player_swim": { "frames": [2, 3] },
+    "player_fall": { "frames": [4] },
+    "player_kick": { "frames": [5] },
+    "player_cheer": { "frames": [6, 9] },
+    "player_action": { "frames": [16, 7] },
+    "player_hold": { "frames": [8, 15] },
+    "player_walk": { "frames": [10, 23] },
+    "player_slide": { "frames": [11] },
+    "player_talk": { "frames": [12] },
+    "player_idle": { "frames": [13] },
+    "player_back": { "frames": [14] },
+    "player_climb": { "frames": [17, 19] },
+    "player_skid": { "frames": [18] },
+    "player_jump": { "frames": [20] },
+    "player_stand": { "frames": [21] },
+    "player_duck": { "frames": [22] }
 },
 
 "texturepacker": [

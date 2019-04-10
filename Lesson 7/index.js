@@ -1,6 +1,6 @@
 var stage, w, h, loader;
 var playerSprite, ground;
-const maxJumpHeight = 3;
+const maxJumpHeight = 2;
 
 //tracking when the button is pressed down
 var rightDown = false;
@@ -34,10 +34,6 @@ function init() {
 function tick(event) {
     spriteMovement();
     stage.update(event);
-    //testing elements 
-    // document.getElementById("test1").innerHTML = spaceDown;
-    // document.getElementById("test2").innerHTML = isJumping;
-    // document.getElementById("test3").innerHTML = jumpHeight;
 }
 
 function handleComplete() {
@@ -47,6 +43,7 @@ function handleComplete() {
     var playerSprite = new createjs.Sprite(player, "player_idle");
     playerSprite.y = 162;
     playerSprite.x = 80;
+    playerSprite.regX = 50;
     playerSprite.name = "player";
 
     var groundImg = loader.getResult("floor");
@@ -65,7 +62,6 @@ function handleComplete() {
 
     createjs.Ticker.timingMode = createjs.Ticker.RAF;
     createjs.Ticker.addEventListener("tick", tick);
-
 }
 
 function handleKeyDown(event) {
@@ -73,12 +69,14 @@ function handleKeyDown(event) {
     switch (event.code) {
         case "ArrowRight":
             if (rightDown == false) {
+                playerSprite.scaleX = 1;
                 playerSprite.gotoAndPlay("player_walk");
                 rightDown = true;
             }
             break;
         case "ArrowLeft":
             if (leftDown == false) {
+                playerSprite.scaleX = -1;
                 playerSprite.gotoAndPlay("player_walk");
                 leftDown = true;
             }
